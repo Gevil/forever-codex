@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Forever Codex - WoW Forever sim comparisons</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Every spec World of Warcraft: Forever's sim supports, modelled with wowsims/forever: talents, gear and the settings behind each number.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--ink:#0b0d10;--night:#11151b;--panel:#171c23;--panel2:#1d232c;--edge:#3b3324;--gold:#c9a45c;--gold2:#f0d58c;
+--text:#e9e2d2;--muted:#9c927e;--good:#8fd16a;--bad:#e07a5f}
+*{box-sizing:border-box}
+body{margin:0;color:var(--text);font:14px/1.5 Inter,system-ui,sans-serif;background:
+ radial-gradient(1200px 600px at 70% -10%,rgba(201,164,92,.13),transparent 60%),
+ radial-gradient(900px 500px at 0% 0%,rgba(171,212,115,.07),transparent 60%),linear-gradient(#0d1014,#090b0e) fixed}
+a{color:var(--gold2)}h1,h2,.display{font-family:Cinzel,Georgia,"Times New Roman",serif;letter-spacing:.04em}
+.wrap{max-width:1320px;margin:0 auto;padding:0 22px}
+header.hero{padding:34px 0 18px;border-bottom:1px solid var(--edge);background:linear-gradient(180deg,rgba(201,164,92,.08),transparent)}
+h1{margin:0;font-size:30px;color:var(--gold2);text-shadow:0 2px 12px rgba(201,164,92,.35)}
+.sub{color:var(--muted);font-size:12.5px}
+.ribbon{margin:14px 0 0;padding:8px 14px;border:1px solid #6b4c22;background:linear-gradient(90deg,rgba(224,122,95,.12),rgba(201,164,92,.08));border-radius:6px;font-size:12.5px;color:#f1c79a}
+main{padding:26px 0 60px}
+h2{font-size:17px;color:var(--gold);margin:26px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.card{display:flex;gap:12px;padding:12px;border:1px solid var(--edge);border-radius:8px;background:linear-gradient(180deg,var(--panel),var(--panel2));
+ text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.card img{flex:none;width:52px;height:52px;border-radius:50%;border:1px solid var(--gold);background:#0b0d10 center/cover;object-fit:cover}
+.card h3{margin:0;font-size:15px;color:var(--gold2)}
+.specs{color:var(--muted);font-size:12px;margin:2px 0 6px}
+.best{font-size:22px;color:var(--good);font-weight:600}
+.best span{font-size:11px;color:var(--muted);font-weight:400}
+.who{font-size:11.5px;color:var(--muted)}
+.who.waiting{color:#7d7461;font-style:italic}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.meta span{font-size:10.5px;padding:1px 7px;border:1px solid var(--edge);border-radius:9px;color:var(--muted)}
+ul.missing{list-style:none;padding:0;margin:0;columns:2;gap:26px}
+ul.missing li{padding:5px 0;border-bottom:1px dashed #2a2b2e;font-size:12.5px}
+ul.missing b{color:#cbc2ae}ul.missing span{color:var(--muted)}
+ul.missing em{float:right;font-style:normal;color:#a1793f;font-size:11px}
+footer{border-top:1px solid var(--edge);padding:16px 0 40px;color:var(--muted);font-size:12px}
+@media (max-width:640px){ul.missing{columns:1}}
+</style></head><body>
+<header class="hero"><div class="wrap">
+  <h1 class="display">Forever Codex</h1>
+  <div class="sub">World of Warcraft: Forever &middot; spec, talent &amp; gear simulations with wowsims/forever</div>
+  <div class="ribbon">Pre-release model output, not in-game measurements. Forever launches 4 Nov 2026; every sim spec here is still alpha. Read the Caveats tab on any class page before trusting a number.</div>
+</div></header>
+<main class="wrap">
+  <h2>Modelled classes</h2>
+  <div class="grid">
+<a class="card" href="druid_balance/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_druid.jpg" alt=""><div class="body"><h3>Druid Codex (Balance)</h3><div class="specs">Balance</div><div class="best">790.7 <span>DPS</span></div><div class="who">shipped Moonkin (P1)</div><div class="meta"><span title="upstream Go tests in druid/balance">single fixture (1 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="druid_feral/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_druid.jpg" alt=""><div class="body"><h3>Druid Codex (Feral Cat)</h3><div class="specs">Feral Cat</div><div class="best">694.0 <span>DPS</span></div><div class="who">shipped Cat (Level 60 preset)</div><div class="meta"><span title="upstream Go tests in druid/feralcat">tested (76 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="hunter/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_hunter.jpg" alt=""><div class="body"><h3>Hunter Codex</h3><div class="specs">Beast Mastery / Marksmanship / Survival</div><div class="best">986.9 <span>DPS</span></div><div class="who">gear search weave_hawk_pre_launch_p8-4</div><div class="meta"><span title="upstream Go tests in hunter">tested (23 tests)</span><span title="stages complete">2/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="mage/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_mage.jpg" alt=""><div class="body"><h3>Mage Codex</h3><div class="specs">Arcane / Fire / Frost</div><div class="best">811.2 <span>DPS</span></div><div class="who">shipped Fire</div><div class="meta"><span title="upstream Go tests in mage">lightly tested (5 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="paladin_protection/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_paladin.jpg" alt=""><div class="body"><h3>Paladin Codex (Protection)</h3><div class="specs">Protection</div><div class="best">589.3 <span>TPS</span></div><div class="who">shipped Protection (shipped set)</div><div class="meta"><span title="upstream Go tests in paladin/protection">lightly tested (3 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="paladin_retribution/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_paladin.jpg" alt=""><div class="body"><h3>Paladin Codex (Retribution)</h3><div class="specs">Retribution</div><div class="best">784.3 <span>DPS</span></div><div class="who">shipped Twist of Light</div><div class="meta"><span title="upstream Go tests in paladin/retribution">tested (14 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="priest/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_priest.jpg" alt=""><div class="body"><h3>Priest Codex (damage)</h3><div class="specs">Shadow / Discipline (Smite)</div><div class="best">796.0 <span>DPS</span></div><div class="who">shipped Shadow Testing</div><div class="meta"><span title="upstream Go tests in priest">single fixture (2 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="rogue/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_rogue.jpg" alt=""><div class="body"><h3>Rogue Codex</h3><div class="specs">Assassination / Combat / Subtlety</div><div class="best">751.7 <span>DPS</span></div><div class="who">shipped Combat SS</div><div class="meta"><span title="upstream Go tests in rogue">single fixture (1 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="shaman_elemental/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_shaman.jpg" alt=""><div class="body"><h3>Shaman Codex (Elemental)</h3><div class="specs">Elemental</div><div class="best">596.9 <span>DPS</span></div><div class="who">shipped Testing</div><div class="meta"><span title="upstream Go tests in shaman/elemental">single fixture (1 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="shaman_enhancement/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_shaman.jpg" alt=""><div class="body"><h3>Shaman Codex (Enhancement)</h3><div class="specs">Enhancement</div><div class="best">687.9 <span>DPS</span></div><div class="who">shipped Testing</div><div class="meta"><span title="upstream Go tests in shaman/enhancement">single fixture (1 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="warlock/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_warlock.jpg" alt=""><div class="body"><h3>Warlock Codex</h3><div class="specs">Affliction / Demonology / Destruction</div><div class="best">755.8 <span>DPS</span></div><div class="who">shipped Demo (Fire Brand)</div><div class="meta"><span title="upstream Go tests in warlock">tested (13 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="warrior/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_warrior.jpg" alt=""><div class="body"><h3>Warrior Codex</h3><div class="specs">Fury / Arms</div><div class="best">771.3 <span>DPS</span></div><div class="who">shipped Fury Pre-BiS</div><div class="meta"><span title="upstream Go tests in warrior/dps">single fixture (2 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+<a class="card" href="warrior_protection/"><img src="https://wow.zamimg.com/images/wow/icons/large/class_warrior.jpg" alt=""><div class="body"><h3>Warrior Codex (Protection)</h3><div class="specs">Protection</div><div class="best">1382.5 <span>TPS</span></div><div class="who">gear search probe_prot_threat_pre_launch</div><div class="meta"><span title="upstream Go tests in warrior/protection">single fixture (2 tests)</span><span title="stages complete">1/6</span><span>Alpha</span></div></div></a>
+  </div>
+  <h2>Not simulated yet</h2>
+  <ul class="missing">
+<li><b>Feral Bear</b> <span>druid</span> <em>Unlaunched</em></li>
+<li><b>Restoration</b> <span>druid</span> <em>GearPlanner</em></li>
+<li><b>Holy</b> <span>paladin</span> <em>GearPlanner</em></li>
+<li><b>Healer</b> <span>priest</span> <em>GearPlanner</em></li>
+<li><b>Restoration</b> <span>shaman</span> <em>GearPlanner</em></li>
+  </ul>
+</main>
+<footer><div class="wrap">
+  sim b28602ddbe (2026-10-23) · game build 1.60.1.70450 · item DB 6ebcd61664db2ca6<br>
+  Numbers come from headless <code>wowsimcli</code> runs against the checkout above; searches run on one seed and are
+  re-measured on a second. Each class page links every entry to the exact sim configuration on wowsims.com.
+</div></footer>
+</body></html>

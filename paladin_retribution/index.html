@@ -258,8 +258,11 @@ const oneTier=es=>{const r=t=>{const i=TIER_RANK.indexOf(splitTier(t)[0]);return
    index card for the same class advertises the realistic number. A group with no row measured under the
    primary rule falls back to the whole tier rather than printing an empty card. */
 const primary=es=>{if(!D.primaryRealism)return es;const p=es.filter(e=>e.realism==D.primaryRealism);return p.length?p:es};
+const hawkHonest=(l,e)=>/ \+ Hawk/.test(l)&&!/ \+ Hawk/.test(e.playstyle)?l.replace(' + Hawk',''):l;
+const famChip=c=>{const l=CTX[c]||c,ps=E.filter(e=>e.ctx==c).map(e=>e.playstyle);
+ return / \+ Hawk/.test(l)&&ps.some(p=>!/ \+ Hawk/.test(p))?l.replace(' + Hawk',' (Hawk only with the Summon Hawk talent)'):l;};
 const bestCards=(pool,kick)=>{const es=searched(pool),at=oneTier(es),one=primary(es.filter(e=>e.tier==at));
- return facsOf(one).map(fc=>[bestIn(one,fc),kick+(fc?' - '+fc:'')])};
+ return facsOf(one).map(fc=>{const e=bestIn(one,fc);return [e,(typeof kick=='function'?kick(e):kick)+(fc?' - '+fc:'')]})};
 /* ---------- overview ---------- */
 /* A searched set can finish below the dev-gear row of its own playstyle, and that is a fact about the tier rather
    than a broken search: the climb starts from the sim fixture's outfit, the tier's availability rules cut several
@@ -279,7 +282,7 @@ function renderOverview(){const s=$('#overview');s.innerHTML='';const main=E.fil
  const grid=(items)=>{const g=h('div','grid');items.forEach(([e,k])=>{if(e)g.append(card(e,k))});return g};
  const byValue=pairs=>pairs.sort((a,b)=>(b[0]?b[0].dps:-1)-(a[0]?a[0].dps:-1));
  s.append(h('h2',null,K.overviewPreRaidTitle||'Best pre-raid sets'));
- s.append(grid((K.overviewPreRaid||[]).flatMap(ctx=>bestCards(prePool(ctx),CTX[ctx]||ctx))));
+ s.append(grid((K.overviewPreRaid||[]).flatMap(ctx=>bestCards(prePool(ctx),e=>hawkHonest(CTX[ctx]||ctx,e)))));
  if(FACS.length>1)s.append(h('p','sub','Each faction is a different character: its own race, racials and faction-restricted loot pool, searched separately. The two columns compare characters, not choices.'));
  s.append(h('h2',null,K.overviewPerSpecTitle||'Best spec per build'));
  s.append(h('p','sub','One card per talent tree per faction, ranked over that tree\'s searched sets: a row is grouped by the tree its talent points landed in, and a card is empty until a search has run for that tree.'));
@@ -316,7 +319,7 @@ const rowCells=(e,mx)=>({name:`<td><div>${esc(e.name)}</div><div>${e.faction?`<s
  bar:`<td style="width:16%"><div class="bar" style="width:${100*e.dps/mx}%"></div></td>`});
 $('#fText').oninput=renderBoard;$('#fPvp').onchange=renderBoard;
 $('#goCmp').onclick=()=>{const ids=[...picked].slice(0,3);cmpIds=ids.concat(cmpIds.filter(i=>!ids.includes(i))).slice(0,3);show('compare');renderCompare()};
-function renderBoard(){chips($('#fPlay'),[...new Set(E.map(e=>e.ctx))].map(c=>[c,E.find(e=>e.ctx==c).playstyle]),fPlay,v=>fPlay=v);
+function renderBoard(){chips($('#fPlay'),[...new Set(E.map(e=>e.ctx))].map(c=>[c,famChip(c)]),fPlay,v=>fPlay=v);
  chips($('#fFac'),FACS.map(x=>[x,x]),fFac,v=>fFac=v);$('#fFac').style.display=FACS.length>1?'':'none';
  [...$('#fFac').querySelectorAll('.chip')].slice(1).forEach((c,i)=>c.classList.add('fac','fac'+FACS[i]));
  chips($('#fTier'),[...new Set(E.filter(visible).map(e=>e.tierName))].map(n=>[n,n]),fTier,v=>fTier=v);
@@ -427,7 +430,7 @@ function renderPhases(){const s=$('#phases');
  <p class="sub">Dates from third-party roadmap summaries of Blizzard's announcements; subject to change.</p>
  <h2>Pre-raid BiS by playstyle</h2><div class="grid" id="bisgrid"></div>
  <p class="sub mt">Pre-raid pools: crafted (by profession pair), reputation, dungeon drops and unrecorded items (Classic-era or Forever-new) with no recorded source up to item level 65; unrecorded epics only with a cited pre-raid admission. PvP rank gear is excluded (see Leaderboard &rarr; show PvP runs).</p>`;
- const g=$('#bisgrid');(K.overviewPreRaid||[]).forEach(ctx=>bestCards(prePool(ctx),CTX[ctx]||ctx).forEach(([e,k])=>e&&g.append(card(e,k))));
+ const g=$('#bisgrid');(K.overviewPreRaid||[]).forEach(ctx=>bestCards(prePool(ctx),e=>hawkHonest(CTX[ctx]||ctx,e)).forEach(([e,k])=>e&&g.append(card(e,k))));
  if(!g.children.length)g.append(h('p','sub','Nothing to rank yet: this class has no searched pre-raid set to show.'))}
 function renderAll(){renderOverview();renderBoard();renderCompare();renderPhases()}
 renderAll();show((location.hash.slice(1)&&TABS.some(t=>t[0]==location.hash.slice(1)))?location.hash.slice(1):'overview');
